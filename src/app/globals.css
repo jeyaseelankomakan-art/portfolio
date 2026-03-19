@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-outfit: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-pulse-slow: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-bounce-slow: bounce-slow 3s infinite;
+  --animate-slide-up: slide-up 10s linear infinite;
+
+  @keyframes pulse-slow {
+
+    0%,
+    100% {
+      opacity: 0.2;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes bounce-slow {
+
+    0%,
+    100% {
+      transform: translateY(-5%);
+    }
+
+    50% {
+      transform: translateY(5%);
+    }
+  }
+
+  @keyframes slide-up {
+
+    0%,
+    20% {
+      transform: translateY(0);
+    }
+
+    25%,
+    45% {
+      transform: translateY(-2rem);
+    }
+
+    50%,
+    70% {
+      transform: translateY(-4rem);
+    }
+
+    75%,
+    95% {
+      transform: translateY(-6rem);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  /* slate-900 */
+}
+
+.dark {
+  --background: #020617;
+  /* slate-950 */
+  --foreground: #f8fafc;
+  /* slate-50 */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Custom scrollbar matching dark/light themes */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  /* slate-300 */
+  border-radius: 5px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+  /* slate-700 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+  /* slate-400 */
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+  /* slate-600 */
+}
