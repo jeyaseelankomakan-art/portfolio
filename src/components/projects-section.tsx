@@ -32,7 +32,7 @@ const projects = [
     image: "/placeholder-portfolio.png",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     github: "https://github.com/jeyaseelankomakan-art/portfolio",
-    demo: "https://github.com/jeyaseelankomakan-art/portfolio",
+    demo: "/",
     featured: false,
   },
 ];
@@ -102,7 +102,10 @@ function ProjectCard({ project }: { project: { title: string, description: strin
           {/* Image Container with Custom Mobile & Desktop Mock */}
           <div
             onClick={() => {
-                if (!project.demo.endsWith(".jar")) {
+                if (project.demo.endsWith(".jar")) return;
+                if (project.demo.startsWith("/")) {
+                  window.location.href = project.demo;
+                } else {
                   window.open(project.demo, "_blank", "noopener,noreferrer");
                 }
             }}
@@ -129,6 +132,8 @@ function ProjectCard({ project }: { project: { title: string, description: strin
                   className="p-3 bg-indigo-600 text-white rounded-full hover:scale-110 transition-transform shadow-lg relative z-50"
                   {...(project.demo.endsWith(".jar")
                     ? { download: true }
+                    : project.demo.startsWith("/")
+                    ? {}
                     : {
                         target: "_blank",
                         rel: "noopener noreferrer",
