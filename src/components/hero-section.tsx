@@ -59,7 +59,7 @@ export function HeroSection() {
                             variants={itemVariants}
                             className="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300 tracking-wider mb-6 border border-indigo-200 dark:border-indigo-800"
                         >
-                            HELLO, I'M
+                            HELLO, I&apos;M
                         </motion.span>
 
                         <motion.h1

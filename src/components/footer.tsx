@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 
 // Custom WhatsApp SVG matching Lucide stroke style

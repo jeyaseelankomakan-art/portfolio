@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Github, Phone, Send, ArrowRight } from "lucide-react";
+import { Mail, Linkedin, Github, Phone, Send } from "lucide-react";
 import React, { useState } from "react";
 
 export function ContactSection() {
@@ -9,16 +9,28 @@ export function ContactSection() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        // Simulate API call
-        setTimeout(() => {
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+            if (response.ok) {
+                setIsSubmitting(false);
+                setIsSubmitted(true);
+                setFormData({ name: "", email: "", message: "" });
+                setTimeout(() => setIsSubmitted(false), 5000);
+            } else {
+                throw new Error("Failed to send message");
+            }
+        } catch (error) {
+            console.error("Submission error:", error);
             setIsSubmitting(false);
-            setIsSubmitted(true);
-            setFormData({ name: "", email: "", message: "" });
-            setTimeout(() => setIsSubmitted(false), 5000);
-        }, 1500);
+            alert("Oops! Something went wrong while saving your message to the database. Please try again.");
+        }
     };
 
     const containerVariants = {
@@ -52,9 +64,9 @@ export function ContactSection() {
                         className="md:col-span-2 space-y-8"
                     >
                         <motion.div variants={fadeUp}>
-                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Let's talk business</h3>
+                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Let&apos;s talk business</h3>
                             <p className="text-slate-600 dark:text-slate-400">
-                                I'm currently open for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                                I&apos;m currently open for new opportunities. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
                             </p>
                         </motion.div>
 

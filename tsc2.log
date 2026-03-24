@@ -1,0 +1,2 @@
+src/lib/prismadb.ts(1,30): error TS2307: Cannot find module '../generated/prisma' or its corresponding type declarations.
+src/lib/prismadb.ts(3,8): error TS1192: Module '"C:/Users/jkoma/OneDrive/Documents/pro/portfolio/node_modules/mariadb/types/index"' has no default export.

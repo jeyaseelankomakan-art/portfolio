@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Laptop, Database, PenTool, BrainCircuit } from "lucide-react";
+import { Laptop, Database, PenTool } from "lucide-react";
 
 export function SkillsSection() {
     const categories = [
