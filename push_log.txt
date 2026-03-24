@@ -1,0 +1,8 @@
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma\schema.prisma.
+Datasource "db": MySQL database "sql12821145" at "sql12.freesqldatabase.com:3306"
+
+Error: P1001: Can't reach database server at `sql12.freesqldatabase.com:3306`
+
+Please make sure your database server is running at `sql12.freesqldatabase.com:3306`.
