@@ -37,6 +37,26 @@ export default function AdminMessagesPage() {
         }
     };
 
+    const handleDelete = async (id: string) => {
+        if (!confirm("Are you sure you want to delete this message?")) return;
+
+        try {
+            const response = await fetch("/api/admin/messages", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ password, id }),
+            });
+
+            if (response.ok) {
+                setMessages(messages.filter((msg) => msg.id !== id));
+            } else {
+                alert("Failed to delete message. Incorrect password or server error.");
+            }
+        } catch (err) {
+            alert("Error connecting to server to delete message.");
+        }
+    };
+
     if (!isAuthenticated) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 p-6 relative overflow-hidden">
@@ -136,9 +156,18 @@ export default function AdminMessagesPage() {
                                             </a>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-sm bg-slate-50 dark:bg-slate-950 px-4 py-2 rounded-full border border-slate-100 dark:border-slate-800">
-                                        <Calendar className="w-4 h-4" />
-                                        {new Date(msg.createdAt).toLocaleString()}
+                                    <div className="flex items-center gap-3">
+                                        <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 text-sm bg-slate-50 dark:bg-slate-950 px-4 py-2 rounded-full border border-slate-100 dark:border-slate-800">
+                                            <Calendar className="w-4 h-4" />
+                                            {new Date(msg.createdAt).toLocaleString()}
+                                        </div>
+                                        <button
+                                            onClick={() => handleDelete(msg.id)}
+                                            className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-full transition-colors cursor-pointer"
+                                            title="Delete message"
+                                        >
+                                            <Trash2 className="w-4 h-4" />
+                                        </button>
                                     </div>
                                 </div>
 

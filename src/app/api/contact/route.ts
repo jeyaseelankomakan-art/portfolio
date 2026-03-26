@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prismadb';
+import { messagesStore, ContactMessage } from '@/lib/store';
 import nodemailer from 'nodemailer';
 
 export async function POST(req: Request) {
@@ -11,14 +11,15 @@ export async function POST(req: Request) {
       return new NextResponse('Missing required fields', { status: 400 });
     }
 
-    // 1. Save message to database
-    const contactMessage = await prisma.contactMessage.create({
-      data: {
-        name,
-        email,
-        message,
-      },
-    });
+    // 1. Save message to in-memory store
+    const contactMessage: ContactMessage = {
+      id: Math.random().toString(36).substring(2, 9),
+      name,
+      email,
+      message,
+      createdAt: new Date().toISOString(),
+    };
+    messagesStore.push(contactMessage);
 
     // 2. Send Email Notification
     // EnsureEMAIL_USER and EMAIL_PASS are configured in your .env file
