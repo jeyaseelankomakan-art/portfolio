@@ -44,5 +44,7 @@ next-env.d.ts
 *.log
 .env.cloud
 push_log.txt
+.history/
+prisma/dev.db
 
 /src/generated/prisma
