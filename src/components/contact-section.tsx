@@ -138,12 +138,12 @@ export function ContactSection() {
                                         rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
                                         className="flex items-center gap-5 p-4 rounded-2xl group hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-200/50 dark:hover:border-slate-700/50"
                                     >
-                                        <div className="w-14 h-14 bg-white dark:bg-slate-800 shadow-[0_4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] text-indigo-500 rounded-2xl flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-indigo-500 group-hover:to-cyan-500 group-hover:text-white transition-all duration-500 transform group-hover:-rotate-6 group-hover:scale-110">
+                                        <div className="shrink-0 w-14 h-14 bg-white dark:bg-slate-800 shadow-[0_4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)] text-indigo-500 rounded-2xl flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-indigo-500 group-hover:to-cyan-500 group-hover:text-white transition-all duration-500 transform group-hover:-rotate-6 group-hover:scale-110">
                                             {info.icon}
                                         </div>
-                                        <div className="flex flex-col">
+                                        <div className="flex flex-col min-w-0">
                                             <span className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-0.5">{info.label}</span>
-                                            <span className="text-base font-semibold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
+                                            <span className="text-base font-semibold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors truncate">
                                                 {info.text}
                                             </span>
                                         </div>
