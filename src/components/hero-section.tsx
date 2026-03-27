@@ -109,7 +109,7 @@ export function HeroSection() {
 
                         {/* Dynamic Role Carousel */}
                         <motion.div variants={itemVariants} className="h-10 mb-8 relative flex items-center justify-center lg:justify-start w-full">
-                            <AnimatePresence mode="popLayout">
+                            <AnimatePresence mode="wait">
                                 <motion.div
                                     key={currentRoleIndex}
                                     initial={{ y: 20, opacity: 0 }}
