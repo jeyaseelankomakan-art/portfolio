@@ -14,8 +14,23 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Jeyaseelan Komakan | Portfolio",
-  description: "Software Engineer, Full Stack Developer, Graphic Designer, Video Editor",
+  title: "Jeyaseelan Komakan | Software Developer Portfolio",
+  description:
+    "Software Developer specializing in full-stack development, Java desktop apps, and system design. Building smart systems with clean code.",
+  keywords: [
+    "Jeyaseelan Komakan",
+    "Software Developer",
+    "Java Developer",
+    "Full Stack Developer",
+    "Portfolio",
+    "Sri Lanka",
+  ],
+  openGraph: {
+    title: "Jeyaseelan Komakan | Software Developer",
+    description:
+      "Building smart systems with clean code. Full-stack development, Java desktop apps, and system design.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -26,11 +41,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${outfit.variable} font-sans antialiased text-slate-900 bg-white dark:text-slate-100 dark:bg-slate-950 transition-colors duration-300`}
+        className={`${inter.variable} ${outfit.variable} font-sans antialiased bg-gray-950 text-slate-100 transition-colors duration-300`}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

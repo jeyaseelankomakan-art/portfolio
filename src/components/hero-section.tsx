@@ -1,25 +1,22 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
-import { ArrowRight, Download, Code2, Palette, TerminalSquare, MousePointerClick } from "lucide-react";
+import { ArrowRight, Download, Code2, Sparkles, ChevronDown } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 export function HeroSection() {
-    // 3D Tilt effect for the profile image
     const x = useMotionValue(0);
     const y = useMotionValue(0);
     const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
     const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
-    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["8deg", "-8deg"]);
+    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-8deg", "8deg"]);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         const rect = e.currentTarget.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        x.set(mouseX / rect.width - 0.5);
-        y.set(mouseY / rect.height - 0.5);
+        x.set((e.clientX - rect.left) / rect.width - 0.5);
+        y.set((e.clientY - rect.top) / rect.height - 0.5);
     };
 
     const handleMouseLeave = () => {
@@ -27,186 +24,265 @@ export function HeroSection() {
         y.set(0);
     };
 
+    const roles = [
+        "Software Engineer",
+        "Full Stack Developer",
+        "Java Developer",
+        "System Designer",
+    ];
+
+    const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+    const [displayText, setDisplayText] = useState("");
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    // Typewriter effect
+    useEffect(() => {
+        const currentRole = roles[currentRoleIndex];
+        let timeout: NodeJS.Timeout;
+
+        if (!isDeleting) {
+            if (displayText.length < currentRole.length) {
+                timeout = setTimeout(() => {
+                    setDisplayText(currentRole.slice(0, displayText.length + 1));
+                }, 80);
+            } else {
+                timeout = setTimeout(() => setIsDeleting(true), 2000);
+            }
+        } else {
+            if (displayText.length > 0) {
+                timeout = setTimeout(() => {
+                    setDisplayText(displayText.slice(0, -1));
+                }, 40);
+            } else {
+                setIsDeleting(false);
+                setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+            }
+        }
+
+        return () => clearTimeout(timeout);
+    }, [displayText, isDeleting, currentRoleIndex]);
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+            transition: { staggerChildren: 0.12, delayChildren: 0.3 },
         },
     };
 
     const itemVariants = {
-        hidden: { y: 30, opacity: 0 },
+        hidden: { y: 40, opacity: 0, filter: "blur(10px)" },
         visible: {
             y: 0,
             opacity: 1,
-            transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+            filter: "blur(0px)",
+            transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as const },
         },
     };
-
-    // Words animation for the name
-    const titleWords = "Jeyaseelan Komakan".split(" ");
-
-    const roles = [
-        "Software Engineer",
-        "Full Stack Developer",
-        "Graphic Designer",
-        "Video Editor",
-    ];
-
-    const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-        }, 3000);
-        return () => clearInterval(interval);
-    }, [roles.length]);
 
     return (
         <section
             id="home"
-            className="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-slate-50 dark:bg-slate-950/80"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden"
         >
-            {/* Ultra-Premium Background Glowing Orbs */}
-            <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-indigo-500/20 rounded-full mix-blend-multiply filter blur-[128px] opacity-70 animate-blob" />
-            <div className="absolute top-1/3 -right-32 w-[500px] h-[500px] bg-cyan-500/20 rounded-full mix-blend-multiply filter blur-[128px] opacity-70 animate-blob animation-delay-2000" />
-            <div className="absolute -bottom-32 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full mix-blend-multiply filter blur-[128px] opacity-70 animate-blob animation-delay-4000" />
+            {/* Ambient Aurora Orbs */}
+            <div className="absolute top-1/4 -left-40 w-[600px] h-[600px] bg-indigo-600/15 rounded-full blur-[160px] animate-aurora" />
+            <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] animate-aurora animation-delay-2000" />
+            <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-purple-600/10 rounded-full blur-[180px] animate-aurora animation-delay-4000" />
 
-            <div className="container mx-auto px-6 relative z-10 isolate">
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-8">
+            {/* Subtle Grid */}
+            <div className="absolute inset-0 bg-grid-pattern opacity-40" />
+
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-8 pt-24 pb-20">
                     
                     {/* Text Content */}
                     <motion.div
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
-                        className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left pt-10"
+                        className="w-full lg:w-3/5 flex flex-col items-center lg:items-start text-center lg:text-left"
                     >
-                        {/* Glassmorphic Intro Badge */}
+                        {/* Status Badge */}
                         <motion.div
                             variants={itemVariants}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/40 dark:bg-slate-800/40 border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-md mb-8 shadow-[0_8px_16px_rgba(0,0,0,0.03)] dark:shadow-[0_8px_16px_rgba(0,0,0,0.2)]"
+                            className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-xl mb-8 shadow-[0_0_20px_rgba(99,102,241,0.1)]"
                         >
-                            <span className="relative flex h-3 w-3">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                              <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
+                            <span className="relative flex h-2.5 w-2.5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
                             </span>
-                            <span className="text-sm font-bold tracking-widest text-slate-700 dark:text-slate-300 uppercase">
-                                Welcome to my universe
+                            <span className="text-xs font-semibold tracking-[0.2em] text-slate-300 uppercase">
+                                Available for Opportunities
                             </span>
                         </motion.div>
 
-                        {/* Staggered Name Reveal */}
-                        <h1 className="text-5xl md:text-7xl lg:text-[5rem] font-extrabold font-outfit text-slate-900 dark:text-white mb-6 leading-[1.1] tracking-tight flex flex-col">
-                            <motion.span variants={itemVariants} className="block pb-2">
-                                I'm {titleWords[0]}
-                            </motion.span>
-                            <motion.span variants={itemVariants} className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 animate-gradient-x bg-[length:200%_auto] pb-2">
-                                {titleWords[1]}
-                            </motion.span>
-                        </h1>
+                        {/* Name */}
+                        <motion.h1
+                            variants={itemVariants}
+                            className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold font-outfit text-white leading-[1.05] tracking-tight mb-2"
+                        >
+                            <span className="block">Jeyaseelan</span>
+                            <span className="block text-gradient mt-1">Komakan</span>
+                        </motion.h1>
 
-                        {/* Dynamic Role Carousel */}
-                        <motion.div variants={itemVariants} className="h-10 mb-8 relative flex items-center justify-center lg:justify-start w-full">
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={currentRoleIndex}
-                                    initial={{ y: 20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    exit={{ y: -20, opacity: 0 }}
-                                    transition={{ duration: 0.4, ease: "easeOut" }}
-                                    className="absolute flex items-center justify-center lg:justify-start w-full text-xl md:text-2xl font-medium text-slate-600 dark:text-slate-400 whitespace-nowrap"
-                                >
-                                    <Code2 className="w-6 h-6 mr-3 text-indigo-500" />
-                                    {roles[currentRoleIndex]}
-                                </motion.div>
-                            </AnimatePresence>
+                        {/* Typewriter Role */}
+                        <motion.div
+                            variants={itemVariants}
+                            className="h-12 mb-6 flex items-center gap-3 mt-4"
+                        >
+                            <Code2 className="w-5 h-5 text-indigo-400 shrink-0" />
+                            <span className="text-xl md:text-2xl font-medium text-slate-400 font-outfit">
+                                {displayText}
+                                <span className="inline-block w-[3px] h-6 bg-indigo-400 ml-1 animate-pulse" />
+                            </span>
                         </motion.div>
 
-                        <motion.p variants={itemVariants} className="max-w-xl text-slate-600 dark:text-slate-400 mb-10 text-lg leading-relaxed mt-2">
-                            Crafting efficient, scalable, and visually stunning digital experiences. I bring ideas to life by blending robust backend architecture with breathtaking frontend design.
+                        {/* Description */}
+                        <motion.p
+                            variants={itemVariants}
+                            className="max-w-xl text-slate-400 mb-10 text-lg leading-relaxed"
+                        >
+                            Building smart systems with clean code. I craft efficient, scalable 
+                            solutions by blending robust backend architecture with intuitive 
+                            frontend experiences.
                         </motion.p>
 
-                        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-5 w-full justify-center lg:justify-start">
+                        {/* CTA Buttons */}
+                        <motion.div
+                            variants={itemVariants}
+                            className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
+                        >
                             <a
                                 href="#projects"
-                                className="relative group w-full sm:w-auto flex items-center justify-center gap-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-bold transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_40px_rgba(99,102,241,0.3)] transform hover:-translate-y-1 overflow-hidden"
+                                className="group relative w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-semibold text-white overflow-hidden transition-all duration-500 hover:-translate-y-1"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                <span className="relative z-10 group-hover:text-white transition-colors duration-300">View Projects</span>
-                                <MousePointerClick className="relative z-10 w-5 h-5 group-hover:text-white transition-colors duration-300" />
+                                {/* Animated gradient bg */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500 bg-[length:200%_100%] animate-gradient-x rounded-2xl" />
+                                <div className="absolute inset-[1px] bg-gray-950 rounded-[calc(1rem-1px)] group-hover:bg-transparent transition-colors duration-500" />
+                                <span className="relative z-10 group-hover:text-white transition-colors">
+                                    View Projects
+                                </span>
+                                <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </a>
                             <a
                                 href="/cv.pdf"
                                 download
-                                className="group w-full sm:w-auto flex items-center justify-center gap-3 bg-white/40 dark:bg-slate-800/40 backdrop-blur-md text-slate-900 dark:text-white px-8 py-4 rounded-2xl font-bold border border-slate-200/50 dark:border-slate-700/50 hover:bg-white/60 dark:hover:bg-slate-700/60 transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-1"
+                                className="group w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-semibold text-slate-300 bg-white/[0.04] border border-white/[0.08] backdrop-blur-md hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-300 hover:-translate-y-1"
                             >
                                 <span>Download CV</span>
-                                <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
+                                <Download className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
                             </a>
+                        </motion.div>
+
+                        {/* Stats Row */}
+                        <motion.div
+                            variants={itemVariants}
+                            className="flex items-center gap-8 mt-14 pt-8 border-t border-white/[0.06]"
+                        >
+                            {[
+                                { value: "5+", label: "Projects Built" },
+                                { value: "3+", label: "Tech Stacks" },
+                                { value: "100%", label: "Passion Driven" },
+                            ].map((stat, idx) => (
+                                <div key={idx} className="text-center lg:text-left">
+                                    <div className="text-2xl font-bold font-outfit text-white">{stat.value}</div>
+                                    <div className="text-xs text-slate-500 mt-1 uppercase tracking-wider">{stat.label}</div>
+                                </div>
+                            ))}
                         </motion.div>
                     </motion.div>
 
-                    {/* Image Content with 3D Interaction */}
+                    {/* Image with 3D Interactive Card */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
-                        className="w-full lg:w-1/2 flex justify-center lg:justify-end relative perspective-[1200px]"
+                        initial={{ opacity: 0, scale: 0.8, rotateY: 15 }}
+                        animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                        transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
+                        className="w-full lg:w-2/5 flex justify-center lg:justify-end"
+                        style={{ perspective: 1200 }}
                     >
                         <motion.div
                             onMouseMove={handleMouseMove}
                             onMouseLeave={handleMouseLeave}
                             style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-                            className="relative w-[300px] h-[380px] md:w-[380px] md:h-[480px] cursor-pointer group"
+                            className="relative w-[280px] h-[360px] md:w-[340px] md:h-[440px] cursor-pointer group"
                         >
-                            {/* Backdrop pulsing aura */}
-                            <div style={{ transform: "translateZ(-50px)" }} className="absolute inset-0 bg-gradient-to-tr from-indigo-500 to-cyan-400 rounded-[3rem] blur-3xl opacity-30 group-hover:opacity-60 transition-opacity duration-500 animate-pulse-slow" />
-                            
+                            {/* Glow Backdrop */}
+                            <div
+                                style={{ transform: "translateZ(-50px)" }}
+                                className="absolute inset-0 bg-gradient-to-tr from-indigo-500/30 to-cyan-400/20 rounded-[2.5rem] blur-3xl opacity-40 group-hover:opacity-70 transition-opacity duration-700 animate-glow-pulse"
+                            />
+
                             {/* Main Image Card */}
-                            <div className="relative w-full h-full bg-slate-200 dark:bg-slate-800 rounded-[3rem] border border-white/40 dark:border-slate-700 shadow-2xl overflow-hidden isolate">
+                            <div className="relative w-full h-full rounded-[2.5rem] border border-white/[0.08] shadow-[0_20px_60px_rgba(0,0,0,0.5)] overflow-hidden">
+                                {/* Gradient overlay at top */}
+                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-950/60 z-10 pointer-events-none" />
+                                
                                 <Image
                                     src="/profile.jpg"
-                                    alt="Profile Photo"
+                                    alt="Jeyaseelan Komakan - Software Developer"
                                     fill
-                                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                                    sizes="(max-width: 768px) 300px, 380px"
+                                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                                    sizes="(max-width: 768px) 280px, 340px"
                                     priority
                                 />
-                                {/* Glass shine overlay */}
-                                <div className="absolute inset-x-0 inset-y-0 w-full h-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none transform -translate-x-full group-hover:translate-x-full" style={{ transition: 'all 1.5s ease' }} />
-                            </div>
 
-                            {/* Floating Glass Badges */}
-                            <div 
-                                style={{ transform: "translateZ(60px)" }} 
-                                className="absolute top-8 -left-8 md:-left-12 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl p-4 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-white/50 dark:border-slate-700/50 flex items-center gap-3 animate-float pointer-events-none"
-                            >
-                                <div className="w-10 h-10 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
-                                    <TerminalSquare className="w-5 h-5" />
-                                </div>
-                                <div className="flex flex-col">
-                                    <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Role</span>
-                                    <span className="text-sm font-bold text-slate-800 dark:text-white">Developer</span>
+                                {/* Shine Effect */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 pointer-events-none overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent animate-shimmer" />
                                 </div>
                             </div>
 
-                            <div 
-                                style={{ transform: "translateZ(80px)" }} 
-                                className="absolute bottom-12 -right-8 md:-right-12 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl p-4 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-white/50 dark:border-slate-700/50 flex items-center gap-3 animate-float delay-1000 pointer-events-none"
+                            {/* Floating Badge - Code */}
+                            <motion.div
+                                style={{ transform: "translateZ(60px)" }}
+                                animate={{ y: [0, -10, 0] }}
+                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                className="absolute top-8 -left-6 md:-left-10 bg-gray-950/80 backdrop-blur-2xl p-4 rounded-2xl border border-white/[0.08] shadow-[0_10px_40px_rgba(0,0,0,0.4)] flex items-center gap-3 pointer-events-none"
                             >
-                                <div className="w-10 h-10 rounded-xl bg-cyan-500/10 dark:bg-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
-                                    <Palette className="w-5 h-5" />
+                                <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+                                    <Code2 className="w-5 h-5" />
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Skill</span>
-                                    <span className="text-sm font-bold text-slate-800 dark:text-white">Designer</span>
+                                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Role</span>
+                                    <span className="text-sm font-bold text-white">Developer</span>
                                 </div>
-                            </div>
+                            </motion.div>
+
+                            {/* Floating Badge - Sparkles */}
+                            <motion.div
+                                style={{ transform: "translateZ(80px)" }}
+                                animate={{ y: [0, -12, 0] }}
+                                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                                className="absolute bottom-12 -right-6 md:-right-10 bg-gray-950/80 backdrop-blur-2xl p-4 rounded-2xl border border-white/[0.08] shadow-[0_10px_40px_rgba(0,0,0,0.4)] flex items-center gap-3 pointer-events-none"
+                            >
+                                <div className="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                                    <Sparkles className="w-5 h-5" />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Focus</span>
+                                    <span className="text-sm font-bold text-white">Clean Code</span>
+                                </div>
+                            </motion.div>
                         </motion.div>
                     </motion.div>
                 </div>
+
+                {/* Scroll Down Indicator */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2, duration: 1 }}
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+                >
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-slate-500">Scroll</span>
+                    <motion.div
+                        animate={{ y: [0, 8, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                        <ChevronDown className="w-4 h-4 text-slate-500" />
+                    </motion.div>
+                </motion.div>
             </div>
         </section>
     );

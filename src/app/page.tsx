@@ -6,18 +6,22 @@ import { ProjectsSection } from "@/components/projects-section";
 import { ExperienceSection } from "@/components/experience-section";
 import { ContactSection } from "@/components/contact-section";
 import { Footer } from "@/components/footer";
+import { ParticlesBackground } from "@/components/particles-background";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <ExperienceSection />
-      <ContactSection />
-      <Footer />
+    <main className="min-h-screen relative">
+      <ParticlesBackground />
+      <div className="relative z-10">
+        <Navbar />
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <ExperienceSection />
+        <ContactSection />
+        <Footer />
+      </div>
     </main>
   );
 }
