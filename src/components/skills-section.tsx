@@ -28,6 +28,7 @@ const skillCategories = [
             { name: "React / Next.js", level: 82, icon: "⚛️", color: "from-sky-400 to-indigo-500", glow: "rgba(56,189,248,0.15)" },
             { name: "REST APIs", level: 85, icon: "🔗", color: "from-emerald-400 to-teal-500", glow: "rgba(52,211,153,0.15)" },
             { name: "UI/UX Design", level: 80, icon: "🎨", color: "from-pink-400 to-rose-500", glow: "rgba(244,114,182,0.15)" },
+            { name: "MERN Stack", level: 88, icon: "💻", color: "from-green-400 to-emerald-500", glow: "rgba(16,185,129,0.15)" },
         ],
     },
     {
