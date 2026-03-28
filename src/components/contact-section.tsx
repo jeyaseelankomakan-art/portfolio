@@ -107,18 +107,18 @@ export function ContactSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="max-w-6xl mx-auto"
+                    className="max-w-6xl mx-auto w-full max-w-full"
                 >
-                    <div className="relative rounded-[2.5rem] overflow-hidden">
+                    <div className="relative rounded-3xl sm:rounded-[2.5rem] overflow-hidden w-full max-w-full">
                         {/* Glass Background */}
                         <div className="absolute inset-0 bg-white/[0.02] backdrop-blur-2xl" />
-                        <div className="absolute inset-0 border border-white/[0.06] rounded-[2.5rem]" />
+                        <div className="absolute inset-0 border border-white/[0.06] rounded-3xl sm:rounded-[2.5rem]" />
                         {/* Decorative gradient */}
                         <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-indigo-500/[0.03] via-transparent to-cyan-500/[0.03] pointer-events-none" />
 
-                        <div className="relative grid lg:grid-cols-5">
+                        <div className="relative grid grid-cols-1 lg:grid-cols-5 w-full">
                             {/* Contact Info Panel */}
-                            <div className="lg:col-span-2 p-10 md:p-14 border-b lg:border-b-0 lg:border-r border-white/[0.06]">
+                            <div className="lg:col-span-2 p-6 sm:p-10 lg:p-14 border-b lg:border-b-0 lg:border-r border-white/[0.06] overflow-hidden">
                                 <h3 className="text-2xl font-bold font-outfit text-white mb-3">
                                     Contact Information
                                 </h3>
@@ -131,15 +131,15 @@ export function ContactSection() {
                                     {contactInfo.map((info, idx) => (
                                         <motion.a
                                             key={idx}
-                                            initial={{ opacity: 0, x: -20 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ delay: 0.3 + idx * 0.08 }}
                                             whileHover={{ x: 6 }}
                                             href={info.href}
                                             target={info.href.startsWith("http") ? "_blank" : undefined}
                                             rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                                            className="group flex items-center gap-4 p-4 rounded-2xl hover:bg-white/[0.04] transition-all duration-300"
+                                            className="group flex items-center gap-3 sm:gap-4 p-4 rounded-2xl hover:bg-white/[0.04] transition-all duration-300 min-w-0 w-full overflow-hidden"
                                         >
                                             <div className="shrink-0 w-12 h-12 rounded-xl bg-white/[0.04] border border-white/[0.06] text-indigo-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-indigo-500 group-hover:to-cyan-500 group-hover:text-white group-hover:border-transparent group-hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] transition-all duration-500 group-hover:scale-105">
                                                 {info.icon}
@@ -159,10 +159,10 @@ export function ContactSection() {
                             </div>
 
                             {/* Form Panel */}
-                            <div className="lg:col-span-3 p-10 md:p-14">
+                            <div className="lg:col-span-3 p-6 sm:p-10 lg:p-14 overflow-hidden w-full">
                                 <motion.div
-                                    initial={{ opacity: 0, x: 30 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: "-100px" }}
                                     transition={{ duration: 0.7, delay: 0.3 }}
                                 >
@@ -173,8 +173,8 @@ export function ContactSection() {
                                         Fill out the form below and I&apos;ll get back to you as soon as possible.
                                     </p>
 
-                                    <form onSubmit={handleSubmit} className="space-y-6">
-                                        <div className="grid md:grid-cols-2 gap-6">
+                                    <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-full">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                                             <div className="space-y-2">
                                                 <label
                                                     htmlFor="contact-name"

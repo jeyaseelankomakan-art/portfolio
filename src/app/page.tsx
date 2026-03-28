@@ -10,7 +10,7 @@ import { ParticlesBackground } from "@/components/particles-background";
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative">
+    <main className="min-h-screen relative overflow-x-hidden w-full max-w-[100vw]">
       <ParticlesBackground />
       <div className="relative z-10">
         <Navbar />

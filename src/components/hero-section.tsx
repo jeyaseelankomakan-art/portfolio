@@ -94,14 +94,14 @@ export function HeroSection() {
             <div className="absolute inset-0 bg-grid-pattern opacity-40" />
 
             <div className="container mx-auto px-6 relative z-10">
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-8 pt-24 pb-20">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-12 pt-24 pb-20">
                     
                     {/* Text Content */}
                     <motion.div
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
-                        className="w-full lg:w-3/5 flex flex-col items-center lg:items-start text-center lg:text-left"
+                        className="w-full lg:w-[55%] flex flex-col items-center lg:items-start text-center lg:text-left"
                     >
                         {/* Status Badge */}
                         <motion.div
@@ -120,7 +120,7 @@ export function HeroSection() {
                         {/* Name */}
                         <motion.h1
                             variants={itemVariants}
-                            className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold font-outfit text-white leading-[1.05] tracking-tight mb-2"
+                            className="text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold font-outfit text-white leading-[1.05] tracking-tight mb-2"
                         >
                             <span className="block">Jeyaseelan</span>
                             <span className="block text-gradient mt-1">Komakan</span>
@@ -198,14 +198,14 @@ export function HeroSection() {
                         initial={{ opacity: 0, scale: 0.8, rotateY: 15 }}
                         animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                         transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
-                        className="w-full lg:w-2/5 flex justify-center lg:justify-end"
+                        className="w-full lg:w-[45%] flex justify-center lg:justify-center"
                         style={{ perspective: 1200 }}
                     >
                         <motion.div
                             onMouseMove={handleMouseMove}
                             onMouseLeave={handleMouseLeave}
                             style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-                            className="relative w-[280px] h-[360px] md:w-[340px] md:h-[440px] cursor-pointer group"
+                            className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] cursor-pointer group"
                         >
                             {/* Glow Backdrop */}
                             <div
@@ -215,15 +215,15 @@ export function HeroSection() {
 
                             {/* Main Image Card */}
                             <div className="relative w-full h-full rounded-[2.5rem] border border-white/[0.08] shadow-[0_20px_60px_rgba(0,0,0,0.5)] overflow-hidden">
-                                {/* Gradient overlay at top */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-950/60 z-10 pointer-events-none" />
+                                {/* Gradient overlay at bottom */}
+                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-950/40 z-10 pointer-events-none" />
                                 
                                 <Image
                                     src="/profile.jpg"
                                     alt="Jeyaseelan Komakan - Software Developer"
                                     fill
-                                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-                                    sizes="(max-width: 768px) 280px, 340px"
+                                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                                    sizes="(max-width: 768px) 300px, 400px"
                                     priority
                                 />
 
@@ -238,7 +238,7 @@ export function HeroSection() {
                                 style={{ transform: "translateZ(60px)" }}
                                 animate={{ y: [0, -10, 0] }}
                                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute top-8 -left-6 md:-left-10 bg-gray-950/80 backdrop-blur-2xl p-4 rounded-2xl border border-white/[0.08] shadow-[0_10px_40px_rgba(0,0,0,0.4)] flex items-center gap-3 pointer-events-none"
+                                className="absolute top-6 -left-2 sm:-left-4 md:-left-6 bg-gray-950/80 backdrop-blur-2xl p-3 md:p-3.5 rounded-2xl border border-white/[0.08] shadow-[0_10px_40px_rgba(0,0,0,0.4)] flex items-center gap-3 pointer-events-none"
                             >
                                 <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400">
                                     <Code2 className="w-5 h-5" />
@@ -254,7 +254,7 @@ export function HeroSection() {
                                 style={{ transform: "translateZ(80px)" }}
                                 animate={{ y: [0, -12, 0] }}
                                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                                className="absolute bottom-12 -right-6 md:-right-10 bg-gray-950/80 backdrop-blur-2xl p-4 rounded-2xl border border-white/[0.08] shadow-[0_10px_40px_rgba(0,0,0,0.4)] flex items-center gap-3 pointer-events-none"
+                                className="absolute bottom-10 -right-2 sm:-right-4 md:-right-6 bg-gray-950/80 backdrop-blur-2xl p-3 md:p-3.5 rounded-2xl border border-white/[0.08] shadow-[0_10px_40px_rgba(0,0,0,0.4)] flex items-center gap-3 pointer-events-none"
                             >
                                 <div className="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400">
                                     <Sparkles className="w-5 h-5" />
