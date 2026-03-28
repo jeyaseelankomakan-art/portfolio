@@ -17,6 +17,7 @@ const skillCategories = [
         skills: [
             { name: "Java (Core + Swing)", level: 88, icon: "☕", color: "from-orange-500 to-red-500", glow: "rgba(249,115,22,0.15)" },
             { name: "JavaScript", level: 85, icon: "⚡", color: "from-yellow-400 to-amber-500", glow: "rgba(250,204,21,0.15)" },
+            { name: "TypeScript", level: 82, icon: "📘", color: "from-blue-400 to-indigo-500", glow: "rgba(96,165,250,0.15)" },
             { name: "Python", level: 78, icon: "🐍", color: "from-blue-400 to-cyan-400", glow: "rgba(96,165,250,0.15)" },
             { name: "PHP", level: 75, icon: "🔮", color: "from-violet-500 to-purple-500", glow: "rgba(139,92,246,0.15)" },
         ],
@@ -25,7 +26,9 @@ const skillCategories = [
         title: "Web & Frameworks",
         skills: [
             { name: "HTML / CSS", level: 92, icon: "🌐", color: "from-cyan-400 to-blue-500", glow: "rgba(34,211,238,0.15)" },
+            { name: "Tailwind CSS", level: 90, icon: "🌊", color: "from-sky-400 to-cyan-500", glow: "rgba(56,189,248,0.15)" },
             { name: "React / Next.js", level: 82, icon: "⚛️", color: "from-sky-400 to-indigo-500", glow: "rgba(56,189,248,0.15)" },
+            { name: "Framer Motion", level: 85, icon: "✨", color: "from-fuchsia-400 to-purple-500", glow: "rgba(232,121,249,0.15)" },
             { name: "REST APIs", level: 85, icon: "🔗", color: "from-emerald-400 to-teal-500", glow: "rgba(52,211,153,0.15)" },
             { name: "UI/UX Design", level: 80, icon: "🎨", color: "from-pink-400 to-rose-500", glow: "rgba(244,114,182,0.15)" },
             { name: "MERN Stack", level: 88, icon: "💻", color: "from-green-400 to-emerald-500", glow: "rgba(16,185,129,0.15)" },
